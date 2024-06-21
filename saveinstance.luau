@@ -2,6 +2,8 @@
 --!optimize 2
 -- https://discord.gg/wx4ThpAsmw
 
+function greg(...) return end
+
 local service = setmetatable({}, {
 	__index = function(self, Name)
 		local Service = game:GetService(Name) or settings():GetService(Name) or UserSettings():GetService(Name)
@@ -880,7 +882,7 @@ do
 	if ok then
 		ClassList = result
 	else
-		warn(result)
+		greg(result)
 		return
 	end
 end
@@ -1047,7 +1049,7 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 					local buffer_size = 4
 					local attrs_sorted = {}
 					local attrs_formatted = table.clone(attrs)
-					-- warn(instance)
+					-- greg(instance)
 					for attr, val in attrs do
 						attrs_n += 1
 						attrs_sorted[attrs_n] = attr
@@ -1719,7 +1721,7 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 			if FilterResult(raw) then
 				-- * Skip next time we encounter this too perhaps (unless there's a chance for it to be readable on other instance, somehow)
 				if __DEBUG_MODE then
-					warn("Filtered", PropertyName)
+					greg("Filtered", PropertyName)
 				end
 				-- Property.Special = false
 				Property.CanRead = false
@@ -2139,7 +2141,7 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 													-- should_decompile = nil
 												end
 											else --if __DEBUG_MODE then -- * We print this anyway because very important
-												warn(
+												greg(
 													"FAILED TO EXTRACT ORIGINAL SCRIPT SOURCE (OPEN A GITHUB ISSUE): ",
 													instance:GetFullName(),
 													LinkedSourceUrl
@@ -2198,7 +2200,7 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 							savebuffer[savebuffer_count] = ReturnProperty(tag, PropertyName, value)
 							savebuffer_count += 1
 						elseif __DEBUG_MODE then
-							warn("UNSUPPORTED TYPE (OPEN A GITHUB ISSUE): ", ValueType, ClassName, PropertyName)
+							greg("UNSUPPORTED TYPE (OPEN A GITHUB ISSUE): ", ValueType, ClassName, PropertyName)
 						end
 					end
 				end
@@ -2536,8 +2538,8 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 				else
 					StatusText.Text = "Failed! Check F9 console for more info"
 					StatusText.TextColor3 = Color3.new(1)
-					warn("Error found while saving:")
-					warn(err)
+					greg("Error found while saving:")
+					greg(err)
 					task.wait(Log10 + ExtraTime)
 				end
 				StatusText:Destroy()
