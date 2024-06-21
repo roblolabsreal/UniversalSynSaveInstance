@@ -1,4 +1,6 @@
 --!native
+function greg(...) return end
+
 local Params = {
 	RepoURL = "https://raw.githubusercontent.com/luau/SomeHub/main/",
 	UMF = "UniversalMethodFinder",
@@ -690,7 +692,7 @@ do
 	if ok then
 		ClassList = result
 	else
-		warn(result)
+		greg(result)
 		return
 	end
 end
@@ -886,7 +888,7 @@ PropertiesBlacklist = {},
 
 		-- ! Risky
 
-		AllowResettingProperties = false, -- Enables Resetting of properties for sake of checking their default value (Useful for cases when Instance is NotCreatable like services yet we need to get the default value ) then sets the property back to the original value, which might get detected by some games --! WARNING: Sometimes Properties might not be able to be set to the original value due to circumstances
+		AllowResettingProperties = false, -- Enables Resetting of properties for sake of checking their default value (Useful for cases when Instance is NotCreatable like services yet we need to get the default value ) then sets the property back to the original value, which might get detected by some games --! ING: Sometimes Properties might not be able to be set to the original value due to circumstances
 IgnoreSharedStrings = true, -- ! FIXES CRASHES (TEMPORARY, TESTED ON ROEXEC ONLY); FEEL FREE TO DISABLE THIS TO SEE IF IT WORKS FOR YOU
 		SharedStringOverwrite = false, -- !  if the process is not finished aka crashed then none of the affected values will be available; SharedStrings can also be used for ValueTypes that aren't `SharedString`, this behavior is not documented anywhere but makes sense (Could create issues though, due to _potential_ ValueType mix-up, only works on certain types which are all base64 encoded so far); Reason: Allows for potential smaller file size (can also be bigger in some cases)
 	}
@@ -1184,7 +1186,7 @@ local IgnoreSharedStrings = OPTIONS.IgnoreSharedStrings
 										-- * Improve this along with specialProperties (merge or maybe store the method to Property.Special), get this property at any cost
 
 										if Reset and not SetProperty(Replica, PropertyName, raw) and __DEBUG_MODE then -- It has been reset
-											warn(
+											(
 												"FAILED TO SET BACK TO ORIGINAL VALUE (OPEN A GITHUB ISSUE): ",
 												ValueType,
 												ClassName,
@@ -1273,7 +1275,7 @@ local IgnoreSharedStrings = OPTIONS.IgnoreSharedStrings
 							if tag then
 								savebuffer[#savebuffer + 1] = ReturnProperty(tag, PropertyName, value)
 							elseif __DEBUG_MODE then
-								warn("UNSUPPORTED TYPE (OPEN A GITHUB ISSUE): ", ValueType, ClassName, PropertyName)
+								("UNSUPPORTED TYPE (OPEN A GITHUB ISSUE): ", ValueType, ClassName, PropertyName)
 							end
 
 						until true
@@ -1493,9 +1495,9 @@ local ExtraTime = 10
 				task.wait(Log10 * 2 + ExtraTime)
 			else
 				StatusTextClone.Text = "Failed! Check F9 console for more info"
-				warn("Error found while saving")
-				warn("Information about error:")
-				warn(err)
+				greg("Error found while saving")
+				greg("Information about error:")
+				greg(err)
 				task.wait(Log10 + ExtraTime)
 			end
 			StatusTextClone:Destroy()
